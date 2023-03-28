@@ -1,5 +1,4 @@
 let spiros = [];
-let spiro2;
 
 
 
@@ -7,16 +6,42 @@ let spiro2;
 function setup() {
 
   // put setup code here
-  createCanvas(1200,800);
+  canvas = createCanvas(1200,800);
   rectMode(CENTER);
   angleMode(DEGREES);
   background(55);
+  canvas.position(300,0);
 
   spiros[0] = new Spiro(500, 205, 150, 0);
   spiros[1] = new Spiro(500, 165, 80, 0);
   spiros[2] = new Spiro(250, 170, 150, 0);
   // spiros[3] = new Spiro(500, 260, 5, 0);
   // spiros[4] = new Spiro(500, 280, 5, 0);
+
+
+  //create sliders
+  slider11 = createSlider(400, 600, 500);
+  slider11.position(20, 20);
+  slider12 = createSlider(0, 300, 100);
+  slider12.position(20, 50);
+  slider13 = createSlider(0, 300, 150);
+  slider13.position(20, 80);
+
+  slider21 = createSlider(400, 600, 500);
+  slider21.position(20, 140);
+  slider22 = createSlider(0, 300, 100);
+  slider22.position(20, 170);
+  slider23 = createSlider(0, 300, 150);
+  slider23.position(20, 200);
+
+  slider31 = createSlider(400, 600, 500);
+  slider31.position(20, 260);
+  slider32 = createSlider(0, 300, 180);
+  slider32.position(20, 290);
+  slider33 = createSlider(0, 300, 40);
+  slider33.position(20, 320);
+
+
 
 
 
@@ -33,73 +58,25 @@ function draw() {
     // spiros[1].initPhase --;
     // spiros[2].initPhase ++;
 
+    spiros[0].r1 = slider11.value()
+    spiros[0].r2 = slider12.value()
+    spiros[0].d = slider13.value()
+    spiros[1].r1 = slider21.value()
+    spiros[1].r2 = slider22.value()
+    spiros[1].d = slider23.value()
+    spiros[2].r1 = slider31.value()
+    spiros[2].r2 = slider32.value()
+    spiros[2].d = slider33.value()
+
+
+
+
     for(let i = 0; i < spiros.length; i++){
         spiros[i].plot();
         spiros[i].draw();
     }
 
 }
-
-
-
-
-
-class Spiro {
-
-    constructor(r1, r2, d, initPhase){
-        this.r1 = r1;
-        this.r2 = r2;
-        this.d = d;
-        this.initPhase = initPhase;
-        this.path = [];
-        this.color = color(255,255,255);
-
-
-
-    }
-
-    plot(){
-        let period = this.r2 / gcd(this.r1, this.r2);
-        let pen = createVector();
-        this.path = [];
-
-        // place pen at starting point
-        // pen.x = (this.r1 - this.r2) * cos(this.initPhase) + this.d * cos(((this.r1-this.r2)/this.r2)*this.initPhase+this.initPhase)
-        // pen.y = (this.r1 - this.r2) * sin(this.initPhase) - this.d * sin(((this.r1-this.r2)/this.r2)*this.initPhase+this.initPhase)
-
-
-        for (let phase = 1; phase < 360 * period+2; phase ++){
-            pen.x = (this.r1 - this.r2) * cos(phase+this.initPhase) + this.d * cos(((this.r1-this.r2)/this.r2)*phase+this.initPhase)
-            pen.y = (this.r1 - this.r2) * sin(phase+this.initPhase) - this.d * sin(((this.r1-this.r2)/this.r2)*phase+this.initPhase)
-            this.path.push(pen.copy());
-
-        }
-    }
-
-    draw(){
-        stroke(this.color);
-        for (let i = 1; i < this.path.length; i++){
-            line(this.path[i-1].x, this.path[i-1].y, this.path[i].x, this.path[i].y);
-        }
-        
-
-    }
-
-    setColor(r, b, g){
-        this.color = color(r, b, g);
-    }
-
-}
-
-
-
-
-
-
-
-
-
-
 
 
 
