@@ -1,16 +1,19 @@
 class Spiro {
 
-    constructor(r1, r2, d, initPhase){
-        this.r1 = r1;
-        this.r2 = r2;
-        this.d = d;
+    constructor(R, r, l, initPhase){
+        this.R = R;
+        this.r = r;
+        this.k;
+        this.l = l;
         this.initPhase = initPhase;
         this.path = [];
         this.color = color(255,255,255);
     }
 
     plot(){
-        let period = this.r2 / gcd(this.r1, this.r2);
+        this.k = this.r / this.R;
+        let period = (this.r) / gcd(this.R, this.r);
+        // console.log(this.R, this.k,this.R * this.k, gcd(this.R, this.R * this.k), (this.R * this.k) / gcd(this.R, this.R * this.k));
         let pen = createVector();
         this.path = [];
 
@@ -20,8 +23,8 @@ class Spiro {
 
 
         for (let phase = 1; phase < 360 * period+2; phase ++){
-            pen.x = (this.r1 - this.r2) * cos(phase+this.initPhase) + this.d * cos(((this.r1-this.r2)/this.r2)*phase+this.initPhase)
-            pen.y = (this.r1 - this.r2) * sin(phase+this.initPhase) - this.d * sin(((this.r1-this.r2)/this.r2)*phase+this.initPhase)
+            pen.x = this.R * (((1-this.k)*cos(phase))+(this.k * this.l * cos(((1-this.k) / this.k)*phase)))
+            pen.y = this.R * (((1-this.k)*sin(phase))+(this.k * this.l * sin(((1-this.k) / this.k)*phase)))
             this.path.push(pen.copy());
 
         }

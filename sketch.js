@@ -12,7 +12,7 @@ function setup() {
   background(55);
   canvas.position(300,0);
 
-  spiros[0] = new Spiro(500, 205, 150, 0);
+  spiros[0] = new Spiro(400, 0.43, 0.5, 0);
   spiros[1] = new Spiro(500, 165, 80, 0);
   spiros[2] = new Spiro(250, 170, 150, 0);
   // spiros[3] = new Spiro(500, 260, 5, 0);
@@ -20,25 +20,25 @@ function setup() {
 
 
   //create sliders
-  slider11 = createSlider(400, 600, 500);
+  slider11 = createSlider(10, 600, 400, 1);
   slider11.position(20, 20);
-  slider12 = createSlider(0, 300, 100);
+  slider12 = createSlider(0, 600, 100,1);
   slider12.position(20, 50);
-  slider13 = createSlider(0, 300, 150);
+  slider13 = createSlider(0, 10, 5);
   slider13.position(20, 80);
 
-  slider21 = createSlider(400, 600, 500);
+  slider21 = createSlider(10, 600, 400, 1);
   slider21.position(20, 140);
-  slider22 = createSlider(0, 300, 100);
+  slider22 = createSlider(0, 600, 100,1);
   slider22.position(20, 170);
-  slider23 = createSlider(0, 300, 150);
+  slider23 = createSlider(0, 10, 5);
   slider23.position(20, 200);
 
-  slider31 = createSlider(400, 600, 500);
+  slider31 = createSlider(10, 600, 400, 1);
   slider31.position(20, 260);
-  slider32 = createSlider(0, 300, 180);
+  slider32 = createSlider(0, 600, 100,1);
   slider32.position(20, 290);
-  slider33 = createSlider(0, 300, 40);
+  slider33 = createSlider(0, 10, 5);
   slider33.position(20, 320);
 
 
@@ -58,15 +58,17 @@ function draw() {
     // spiros[1].initPhase --;
     // spiros[2].initPhase ++;
 
-    spiros[0].r1 = slider11.value()
-    spiros[0].r2 = slider12.value()
-    spiros[0].d = slider13.value()
-    spiros[1].r1 = slider21.value()
-    spiros[1].r2 = slider22.value()
-    spiros[1].d = slider23.value()
-    spiros[2].r1 = slider31.value()
-    spiros[2].r2 = slider32.value()
-    spiros[2].d = slider33.value()
+
+
+    spiros[0].R = slider11.value();
+    spiros[0].r = slider12.value();
+    spiros[0].l = slider13.value()/10;
+    spiros[1].R = slider21.value();
+    spiros[1].r = slider22.value();
+    spiros[1].l = slider23.value()/10;
+    spiros[2].R = slider31.value();
+    spiros[2].r = slider32.value();
+    spiros[2].l = slider33.value()/10;
 
 
 
@@ -85,4 +87,5 @@ function gcd(a, b){
         return a
     }
     return gcd(b, a % b);
+
 }
