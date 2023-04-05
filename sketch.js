@@ -1,4 +1,8 @@
 let spiros = [];
+let canvas;
+let slider11, slider12, slider13;
+let slider21, slider22, slider23;
+let slider31, slider32, slider33;
 
 
 
@@ -84,7 +88,7 @@ function draw() {
 
 function gcd(a, b){
     if(b===0){
-        return a
+        return a;
     }
     return gcd(b, a % b);
 
